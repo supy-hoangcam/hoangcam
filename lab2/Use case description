@@ -1,71 +1,30 @@
-Use Case Descriptions: Hub Media Bán Lẻ Đa Kênh
+Use Case Description (ít nhất 2 chức năng quan trọng)
 
-1. Quản lý nội dung số
-Tên: Quản trị nội dung số
-Mô tả: Cho phép người dùng tải lên, chỉnh sửa, lưu trữ và quản lý nội dung đa phương tiện (ảnh, video, bài viết).
-Tác nhân: Quản trị viên, Nhân viên marketing
-Dòng sự kiện chính:
-Người dùng đăng nhập.
-Chọn chức năng “Quản lý nội dung”.
+-Use Case 1: Quản lý nội dung số
+-Tên Use Case: Quản lý nội dung số
+-Tác nhân chính: Nhân viên Marketing
+-Mục tiêu: Tạo, chỉnh sửa, lưu trữ, phân loại nội dung truyền thông.
+-Tiền điều kiện: Người dùng đã đăng nhập.
+-Luồng sự kiện chính:
+Nhân viên chọn chức năng “Tạo nội dung mới”.
+Nhập thông tin (tiêu đề, mô tả, hình ảnh/video).
+Hệ thống lưu nội dung và gắn tag phân loại.
+Nội dung sẵn sàng để xuất bản đa kênh.
+-Luồng thay thế:
+Nếu thiếu thông tin bắt buộc → hệ thống báo lỗi.
+Hậu điều kiện: Nội dung được lưu trong kho nội dung số.
 
-Tải lên nội dung hoặc chọn chỉnh sửa nội dung có sẵn.
-Lưu nội dung vào hệ thống CMS.
-Dòng thay thế: Nếu nội dung vi phạm quy định (dung lượng, định dạng) → hiển thị thông báo lỗi.
-Tiền điều kiện: Người dùng phải đăng nhập.
-Hậu điều kiện: Nội dung được lưu trữ và sẵn sàng phân phối.
-
-2. Xuất bản đa kênh
-Tên: Xuất bản nội dung lên các kênh truyền thông
-Mô tả: Hệ thống tự động đăng bài/clip lên các nền tảng: Zalo, TikTok, YouTube, Facebook, Website.
-Tác nhân: Nhân viên marketing, Quản trị viên
-Dòng sự kiện chính:
-Người dùng chọn nội dung cần xuất bản.
-Chọn kênh muốn đăng (multi-select).
-Thiết lập thời gian xuất bản (ngay/lên lịch).
-Hệ thống đăng tải lên kênh tương ứng.
-Dòng thay thế: Kết nối API với nền tảng thất bại → lưu trạng thái “chưa đăng” để thử lại.
-Tiền điều kiện: Hệ thống đã kết nối API các kênh.
-Hậu điều kiện: Nội dung được đăng thành công đa kênh.
-
-3. Hỗ trợ livestream & clip ngắn
-Tên: Quản lý Livestream/Clip ngắn
-Mô tả: Hỗ trợ phát trực tiếp hoặc tạo clip ngắn để quảng bá sản phẩm siêu thị mini.
-Tác nhân: Nhân viên truyền thông, Người bán hàng
-Dòng sự kiện chính:
-Người dùng chọn chức năng “Livestream/Clip ngắn”.
-Thiết lập nội dung, tiêu đề, sản phẩm liên quan.
-Chọn kênh phát (Facebook, TikTok, YouTube).
-Hệ thống hỗ trợ streaming đa kênh.
-Dòng thay thế: Mạng yếu → hệ thống tự động giảm bitrate để duy trì chất lượng.
-Tiền điều kiện: Người dùng có quyền quản lý livestream.
-Hậu điều kiện: Livestream được phát/clip ngắn được tạo và lưu trữ.
-
-4. Quản lý SEO & Analytics
-Tên: Tối ưu SEO & phân tích dữ liệu
-Mô tả: Cung cấp công cụ SEO (từ khóa, mô tả meta) và phân tích hiệu quả nội dung (lượt xem, tương tác, chuyển đổi).
-Tác nhân: Quản trị viên, Nhân viên marketing
-Dòng sự kiện chính:
-Người dùng chọn chức năng SEO/Analytics.
-Nhập từ khóa tối ưu cho nội dung.
-Hệ thống hiển thị báo cáo phân tích.
-Dòng thay thế: Nếu chưa có dữ liệu thống kê → hiển thị thông báo “Chưa đủ dữ liệu”.
-Tiền điều kiện: Nội dung đã được xuất bản.
-Hậu điều kiện: Người dùng nhận được báo cáo tối ưu và phân tích hiệu quả.
-
-5. Quản lý chiến dịch truyền thông
-Tên: Tạo và quản lý chiến dịch marketing
-Mô tả: Cho phép lên kế hoạch, tạo timeline và quản lý tiến độ chiến dịch truyền thông đa kênh.
-Tác nhân: Quản trị viên, Trưởng nhóm marketing
-
-Dòng sự kiện chính:
-Người dùng tạo chiến dịch mới.
-Thêm nội dung và kênh triển khai.
-Thiết lập deadline, phân công nhân sự.
-Theo dõi tiến độ qua dashboard.
-Dòng thay thế: Nếu chiến dịch bị trễ → hệ thống cảnh báo.
-Tiền điều kiện: Người dùng có quyền quản lý chiến dịch.
-Hậu điều kiện: Chiến dịch được lưu và theo dõi tiến độ.
-
-Áp dụng SDLC
-Waterfall: Phù hợp khi xây dựng tính năng nền tảng (CMS, quản lý user, tích hợp API kênh) → các bước phân tích, thiết kế, triển khai, kiểm thử rõ ràng.
-Agile Scrum: Phù hợp khi phát triển tính năng mới (livestream đa kênh, tối ưu SEO, báo cáo analytics) → chia sprint 2-3 tuần, demo với khách hàng liên tục.
+Use Case 2: Xuất bản đa kênh
+-Tên Use Case: Xuất bản đa kênh
+-Tác nhân chính: Nhân viên Marketing
+-Mục tiêu: Đăng tải nội dung lên nhiều nền tảng (Facebook, TikTok, YouTube, Website).
+-Tiền điều kiện: Nội dung đã được chuẩn bị và phê duyệt.
+-Luồng sự kiện chính:
+Nhân viên chọn nội dung cần xuất bản.
+Chọn kênh phân phối (FB, TikTok, YouTube, Zalo…).
+Hệ thống kết nối API với nền tảng ngoài.
+Nội dung được đăng tải đồng thời.
+Hệ thống trả về trạng thái thành công/thất bại từng kênh.
+-Luồng thay thế:
+Nếu API nền tảng lỗi → hệ thống lưu log và báo cho nhân viên.
+Hậu điều kiện: Nội dung hiển thị trên các kênh đã chọn.
