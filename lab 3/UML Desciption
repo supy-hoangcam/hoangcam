@@ -1,1 +1,78 @@
+File mô tả Sequence Diagram – ATM Mini Project
 
+1. Đối tượng tham gia (Actors & Components)
+Customer (Khách hàng)
+  -Đăng nhập bằng thẻ ATM và PIN.
+  -Thực hiện các nghiệp vụ: rút tiền, gửi tiền, chuyển khoản, xem số dư.
+  -Nhận biên lai (receipt) và thông báo lỗi (nếu có).
+ATM UI (Giao diện máy ATM)
+  -Màn hình + bàn phím nhập PIN.
+  -Hiển thị menu giao dịch, xác nhận thao tác.
+  -Giao tiếp với ATM Controller.
+ATM Controller (Bộ điều khiển ATM / phần mềm trung gian)
+  -Quản lý logic phiên giao dịch.
+  -Xác thực PIN, kiểm tra số dư, xử lý nghiệp vụ.
+  -Gửi yêu cầu đến Bank Server và điều khiển Cash Dispenser / Receipt Printer.
+Bank Server (Core Banking System)
+  -Lưu trữ thông tin tài khoản.
+  -Xử lý nghiệp vụ rút/gửi/chuyển tiền, cập nhật số dư.
+  -Trả kết quả về cho ATM Controller.
+Cash Dispenser (Két tiền / khay tiền)
+  -Phát tiền cho khách.
+Receipt Printer (Máy in biên lai)
+  -In biên lai giao dịch.
+
+2. Thông điệp trao đổi (Messages)
+
+2.1. Đăng nhập (Insert Card & PIN Authentication)
+Customer → ATM UI: Insert Card.
+ATM UI → ATM Controller: detectCard(cardInfo).
+ATM Controller → Bank Server: verifyCard(cardInfo).
+Bank Server → ATM Controller: returnCardStatus(Valid/Invalid).
+ATM Controller → ATM UI: requestPIN().
+Customer → ATM UI: enterPIN(PIN).
+ATM UI → ATM Controller: submitPIN(PIN).
+ATM Controller → Bank Server: verifyPIN(cardInfo, PIN).
+Bank Server → ATM Controller: authResult(Success/Fail).
+ATM Controller → ATM UI: showMenu().
+
+2.2. Rút tiền (Withdraw Cash)
+  1. Customer → ATM UI: chọn "Withdraw".
+  2. ATM UI → ATM Controller: withdrawRequest(amount).
+  3. ATM Controller → Bank Server: checkBalance(cardInfo, amount).
+  4. Bank Server → ATM Controller: balanceStatus(Sufficient/Insufficient).
+  5. alt (Insufficient): ATM Controller → ATM UI: showError("Not enough balance").
+  6. ATM Controller → Bank Server: debitAccount(amount).
+  7. Bank Server → ATM Controller: confirmDebit(Success).
+  8. ATM Controller → Cash Dispenser: dispenseCash(amount).
+  9. Cash Dispenser → Customer: deliverCash.
+  10. ATM Controller → Receipt Printer: printReceipt(transaction).
+  11. Receipt Printer → Customer: receipt.
+  12. ATM Controller → ATM UI: showMessage("Transaction Completed").
+
+2.3. Chuyển khoản (Transfer Money)
+  1. Customer → ATM UI: chọn "Transfer".
+  2. ATM UI → ATM Controller: transferRequest(targetAccount, amount).
+  3. ATM Controller → Bank Server: validateTargetAccount(targetAccount).
+  6. Bank Server → ATM Controller: accountStatus(Valid/Invalid).
+  7. alt (Invalid): ATM Controller → ATM UI: showError("Invalid Account").
+  8. ATM Controller → Bank Server: processTransfer(sourceAccount, targetAccount, amount).
+  9. Bank Server → ATM Controller: transferResult(Success).
+  11. ATM Controller → Receipt Printer: printReceipt(transaction).
+  12. Receipt Printer → Customer: receipt.
+  13. ATM Controller → ATM UI: showMessage("Transfer Completed").
+
+2.4. Xem số dư (Balance Inquiry)
+  1. Customer → ATM UI: chọn "Balance Inquiry".
+  2. ATM UI → ATM Controller: balanceRequest().
+  3. ATM Controller → Bank Server: getBalance(account).
+  4. Bank Server → ATM Controller: balanceInfo(balance).
+  5. ATM Controller → ATM UI: showBalance(balance).
+  6. ATM Controller → Receipt Printer (tuỳ chọn): printBalanceReceipt().
+  7. Receipt Printer → Customer: receipt.
+
+2.5. Kết thúc phiên (Exit / Eject Card)
+  1. Customer → ATM UI: chọn "Exit".
+  2. ATM Controller → ATM UI: ejectCard().
+  3. ATM UI → Customer: returnCard().
+  4. ATM Controller → ATM UI: showMessage("Thank you").
