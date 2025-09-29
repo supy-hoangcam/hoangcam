@@ -1,0 +1,18 @@
+@startuml
+left to right direction
+actor Customer
+actor BankSystem
+
+rectangle ATM {
+  Customer --> (Login)
+  Customer --> (Withdraw Cash)
+  Customer --> (Deposit Cash)
+  Customer --> (Check Balance)
+  Customer --> (Change PIN)
+  (Login) --> BankSystem
+  (Withdraw Cash) --> BankSystem
+  (Deposit Cash) --> BankSystem
+  (Check Balance) --> BankSystem
+  (Change PIN) --> BankSystem
+}
+@enduml
