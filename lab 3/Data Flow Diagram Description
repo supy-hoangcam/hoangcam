@@ -1,0 +1,75 @@
+Data Flow Diagram Description: ATM Mini Project
+
+1. Data Stores
+-D1: Thông tin thẻ & tài khoản
+(số thẻ, mã PIN, số tài khoản, trạng thái thẻ)
+-D2: Thông tin số dư tài khoản
+(số dư hiện tại, hạn mức rút tiền/ngày, hạn mức chuyển khoản)
+-D3: Lịch sử giao dịch
+(mã giao dịch, loại giao dịch, số tiền, thời gian, trạng thái, biên lai in)
+-D4: Thông tin máy ATM
+(số seri ATM, trạng thái két tiền, trạng thái máy in biên lai)
+-D5: Không sử dụng
+-D6: Không sử dụng
+
+2. Processing Steps
+B1: Đăng nhập (Insert Card & PIN Authentication)
+  -Nhận yêu cầu đăng nhập từ khách hàng (Insert Card).
+  -Đọc D1 để kiểm tra thông tin thẻ và xác thực PIN.
+  -Nếu thành công → hiển thị menu giao dịch.
+  -Nếu thất bại → trả lại thẻ, thông báo lỗi.
+
+B2: Rút tiền (Withdraw Cash)
+  -Nhận yêu cầu rút tiền (số tiền).
+  -Đọc D2 để kiểm tra số dư tài khoản.
+  -Nếu số dư đủ → cập nhật D2 (giảm số dư), ghi log vào D3, điều khiển két tiền (Cash Dispenser) để phát tiền.
+  -Nếu số dư không đủ → hiển thị thông báo lỗi.
+  -In biên lai (Receipt Printer).
+
+B3: Chuyển khoản (Transfer Money)
+  -Nhận yêu cầu chuyển tiền (số tài khoản đích, số tiền).
+  -Đọc D1 để kiểm tra tài khoản đích.
+  -Nếu hợp lệ → cập nhật D2 (giảm số dư tài khoản nguồn, tăng số dư tài khoản đích), ghi log vào D3.
+  -Nếu không hợp lệ → thông báo lỗi.
+  -In biên lai.
+
+B4: Xem số dư (Balance Inquiry)
+  -Nhận yêu cầu xem số dư.
+  -Đọc D2 để lấy thông tin số dư.
+  -Trả kết quả cho khách hàng.
+  -Tuỳ chọn in biên lai và lưu vào D3.
+
+B5: Kết thúc phiên (Exit / Eject Card)
+  -Nhận yêu cầu thoát từ khách hàng.
+  -Trả lại thẻ.
+  -Hiển thị thông báo “Thank you”.
+
+3. Alternative Flows
+A1 (Sai PIN nhiều lần):
+  -Trigger: Khách nhập sai PIN quá số lần cho phép.
+  -Steps: ATM Controller yêu cầu giữ lại thẻ, thông báo đến ngân hàng, không cho phép tiếp tục.
+
+A2 (Không đủ tiền trong két ATM):
+  -Trigger: Số dư khách hàng đủ nhưng két ATM không còn tiền.
+  -Steps: ATM Controller phát hiện lỗi từ D4, thông báo “ATM out of service”.
+
+A3 (Lỗi máy in biên lai):
+  -Trigger: Receipt Printer không hoạt động.
+  -Steps: Ghi nhận giao dịch vào D3, hiển thị thông báo trên màn hình thay thế.
+
+A4 (Mất kết nối Bank Server):
+  -Trigger: ATM Controller không nhận phản hồi từ Bank Server.
+  -Steps: ATM Controller hiển thị lỗi, trả lại thẻ, huỷ giao dịch.
+
+4. Notes
+Technology:
+  -ATM UI: Giao diện phần cứng ATM (màn hình + bàn phím).
+  -ATM Controller: Phần mềm trung gian điều phối.
+  -Bank Server: Core Banking System.
+  -Cash Dispenser, Receipt Printer: Thiết bị ngoại vi.
+Special Requirements:
+  -Thời gian xử lý mỗi giao dịch ≤ 5 giây.
+  -Đảm bảo tính toàn vẹn dữ liệu giao dịch.
+  -Có cơ chế rollback nếu giao dịch lỗi giữa chừng.
+
+Tương thích với chuẩn bảo mật thẻ (ISO 8583).
