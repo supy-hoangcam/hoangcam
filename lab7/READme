@@ -12,3 +12,8 @@ Lab 07 - ATM Withdraw Module
 pip install mysql-connector-python
 mysql -u root -p < schema.sql
 python3 withdraw.py
+
+Dự liệu mẫu
+INSERT INTO accounts(account_no, balance) VALUES ('1001', 5000);
+INSERT INTO cards(card_no, account_id, pin_hash, status) 
+VALUES ('12345678', 1, SHA2('1234', 256), 'ACTIVE');
