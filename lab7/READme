@@ -1,0 +1,14 @@
+Lab 07 - ATM Withdraw Module
+
+1. Mô tả
+- Prototype Python mô phỏng rút tiền ATM.
+- Kết nối MySQL qua `mysql.connector`.
+- Có chức năng:
+  - `verify_pin(card_no, pin)`
+  - `withdraw(card_no, amount)`
+
+2. Cách chạy
+```bash
+pip install mysql-connector-python
+mysql -u root -p < schema.sql
+python3 withdraw.py
