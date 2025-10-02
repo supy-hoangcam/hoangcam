@@ -1,1 +1,28 @@
+# Report – Agile Project Management ATM System
+
+## 1. Project
+- Tên: ATM System
+- Phương pháp: Scrum (2 tuần/Sprint)
+
+## 2. Epic
+- ATM Basic Functions
+
+## 3. User Stories
+- US1: Rút tiền
+- US2: Kiểm tra số dư
+- US3: Chuyển khoản
+- US4: Bảo trì
+
+## 4. Tasks & Subtasks
+- US1: Thiết kế UI, Code backend, Kết nối DB, Unit test
+- US2: Thiết kế UI, Code backend, Test case
+
+## 5. Sprint 1
+- Thời gian: 2 tuần
+
+## 6. Evidence
+- [Ảnh Backlog Jira]
+- [Ảnh Sprint Board]
+- [Ảnh Burndown Chart]
+
 
