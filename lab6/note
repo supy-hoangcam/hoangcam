@@ -1,0 +1,21 @@
+ATM Class & Package Design
+
+1. Class Diagram
+- Các lớp chính: ATM, Card, Account, Transaction.
+- Thêm enum: `CardStatus` (ACTIVE/BLOCKED/EXPIRED) và `TxType` (WITHDRAW/DEPOSIT/TRANSFER).
+- Quan hệ:
+  - ATM liên kết với Card, Transaction.
+  - Card có thể liên kết nhiều Account (1-N).
+  - Account có nhiều Transaction (1-N).
+
+2. Package Diagram
+- UI: Screen, Keypad (tương tác với người dùng).
+- Controller: ATMController, AuthService, TxService.
+- BankService**: CardService, AccountService, TransactionRepo.
+- Hardware: CardReader, CashDispenser, ReceiptPrinter.
+
+3. Quy trình làm việc
+1. Người dùng nhập PIN/Amount qua UI.
+2. ATMController: gọi `AuthService` và `TxService` để xác thực và xử lý.
+3. BankService: quản lý tài khoản, thẻ, và giao dịch.
+4. Hardware: thực hiện chức năng đọc thẻ, nhả tiền, in biên lai.
