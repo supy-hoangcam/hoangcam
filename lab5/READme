@@ -25,3 +25,8 @@ Hệ thống nhận dữ liệu, gửi yêu cầu xác thực
 Server kiểm tra thông tin
 Trả về kết quả: Success / Fail
 Giao diện hiển thị thông báo
+
+Kiểm thử:
+Chạy code bằng VS Code
+Đăng nhập tài khoản: n23dcpt046/123456 -> Hiện "Đăng nhập thành công"
+Đăng nhập bằng thông tin khác -> Yêu cầu nhập lại Username/Password
