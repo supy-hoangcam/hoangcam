@@ -1,0 +1,17 @@
+Lab 08 – Testing ATM
+
+Unit Test
+- verify_pin: kiểm tra PIN đúng/sai
+- withdraw: kiểm tra số dư đủ/không đủ
+- Kết quả: tất cả case pass 
+
+Integration Test (Form Login)
+- Login thành công → chuyển Dashboard
+- Login sai → báo "Invalid login"
+- Empty input → báo lỗi "required"
+- Kết quả: tất cả case pass
+
+Tổng kết
+- Đã hoàn thành Unit test và Integration test
+- Điểm mạnh: mock DB thành công, test case đủ
+- Hạn chế: cần bổ sung thêm test security (SQL injection)
