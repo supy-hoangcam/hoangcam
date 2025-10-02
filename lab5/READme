@@ -1,1 +1,27 @@
+Tích hợp, quản lý & báo cáo
+Họ và tên: Nguyễn Duy Tân
+MSSV: N23DCPT046
+Lớp: D23CQPT01-N
+Môn học: Nhập môn công phần mềm 
 
+Qui trình làm việc:
+
+Tác nhân:
+-Người dùng (User)
+-Hệ thống (System)
+
+Use Cases:
+
+Login – Đăng nhập hệ thống
+(include: Nhập Username/Password)
+Forgot Password – Quên mật khẩu
+Sign Up – Đăng ký tài khoản mới
+Social Login – Đăng nhập bằng mạng xã hội (Google/Facebook/…)
+
+Sequence Diagram (Login)
+Luồng chính (Main Flow):
+User nhập Username/Password vào Form Login
+Hệ thống nhận dữ liệu, gửi yêu cầu xác thực
+Server kiểm tra thông tin
+Trả về kết quả: Success / Fail
+Giao diện hiển thị thông báo
